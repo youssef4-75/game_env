@@ -1,13 +1,13 @@
 import pygame as pg
 
 
-from container import ObjectsContainer
-from services import ServicesManager, Repeller, PlayerTranslator, PlayerDrawer
+from game.game_manager import GameManager
+
 from objects import ControlPannel, Player
 
 from utils import Vector
-from screen import Window
 from utils.displayer import Displayer
+
 
 
 
@@ -18,63 +18,37 @@ control3 = ControlPannel(pg.K_y, pg.K_h, pg.K_g, pg.K_j)
 control4 = ControlPannel(pg.K_f, pg.K_v, pg.K_c, pg.K_b)
 
 
+win_size = (800, 600)
+game = GameManager.init("Magical Knights", win_size)
 
-services_manager = ServicesManager(
-    PlayerDrawer(),
-    Repeller(),
-    PlayerTranslator(),
-)
 
-win_size =  (800, 600)
-win = Window("Game", *win_size)
-
-lake = ObjectsContainer()
-
-@lake.add_to_me
+@game.add
 def player(): return Player("me", "red", Vector.random(*win_size).to_tuple(), control1)
-# displayer = Displayer(win, "grey", "red", pg.Rect(10, 10, 100, 20), value_provider = (lambda : lake[0].interact.HP), max_provider = lambda :100)
+# displayer = Displayer(win, "grey", "red", pg.Rect(10, 10, 100, 20), value_provider = (lambda : game.addct.HP), max_provider = lambda :100)
 
-@lake.add_to_me
+@game.add
 def player(): return Player("you", "blue", Vector.random(*win_size).to_tuple(), control2)
 
-@lake.add_to_me
+@game.add
 def player(): return Player("you", "green", Vector.random(*win_size).to_tuple(), control3)
 
-@lake.add_to_me
+@game.add
 def player(): return Player("you", "yellow", Vector.random(*win_size).to_tuple(), control4)
 
-# player = Player("me", "red")
-# lake.add(player)
-n = len(lake)
+def value_provider(player: Player):
+    return player.interact.HP 
 
 
-while win.running:
-    win.fill((0, 0, 0))
-    for event in win.events():
-        if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
-            ...
-    
-    for p in lake:
-        services_manager.draw(win, p)
-        services_manager.translate(p)
-
-    lake.interaction()
-    lake.garbage_collect()
-    displayer.display()
-    win.display()
+r = []
+for i in range(1, 5):
+    r.append(
+        pg.Rect(10, 30 * i, 100, 20)
+    )
+game.add_displayers("grey", "red", *r, value_provider=value_provider)
 
 
+while game.running:
+    for event in game.key_events():
+        ...
 
-
-
-
-
-
-
-
-# from pygame import Rect
-
-
-# r1, r2 = Rect(316, 286, 30, 30), Rect(320, 280, 30, 30)
-
-# print(r1.colliderect(r2))
+    game.loop()

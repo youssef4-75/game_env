@@ -1,11 +1,8 @@
 from pygame import Color, Rect, Surface
 from screen import Window
-from typing import Callable, Any, Protocol
+from typing import Callable
 
-# Option 1: Using Protocol for type safety
-class Observable(Protocol):
-    def get_value(self) -> int: ...
-    def get_max(self) -> int: ...
+
 
 class Displayer:
     def __init__(self, 
@@ -14,6 +11,7 @@ class Displayer:
                  color: Color, 
                  rect: Rect, 
                  /, 
+                 observable_obj,
                  value_provider: Callable[[], int],  # Injected function that returns current value
                  max_provider: Callable[[], int] | None = None):
         """
@@ -25,14 +23,15 @@ class Displayer:
         self.bg = bg_color
         self.rect = rect
         self.window = win
-        self.max = max_provider()
+        self.max = max_provider() if max_provider else 100
+        self._observable = observable_obj
         self._value_provider = value_provider
         self._max_provider = max_provider
     
     @property
     def current_value(self) -> int:
         """Get current value from injected provider"""
-        return self._value_provider()
+        return self._value_provider(self._observable)
     
     @property
     def max_value(self) -> int:

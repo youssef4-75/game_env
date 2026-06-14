@@ -6,3 +6,5 @@ currently on: displaying additional info
 
 next:
 - a block to display HP and MP
+- centralise the game main objects
+- manipulate the user input efficently
