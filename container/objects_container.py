@@ -34,3 +34,10 @@ class ObjectsContainer(OrderedLake):
                 interacted.add((p1, p2))
                 InteractionsRegistry.map(p1.typeIdentifier(), p2.typeIdentifier())(p1, p2)
     
+    def garbage_collect(self):
+        removing = []
+        for i in self.objects:
+            if not i.is_alive():
+                removing.append(i)
+        for _ in removing:
+            self.objects.remove(_)

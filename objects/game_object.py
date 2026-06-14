@@ -9,13 +9,14 @@ from utils import Vector, K, SPEED_LIMIT, Pointable
 
 
 class GameObject(ABC):
-    def __init__(self, left, top, width, height, color) -> None:
+    def __init__(self, left, top, width, height, color, TTL=float("inf")) -> None:
         super().__init__()
         self.__rect = pg.Rect(left, top, width, height)
         self.__surf = pg.Surface((width, height))
         self.__surf.fill(color)
         self.__vel = Vector()
         self.__accel = Vector()
+        self.__TTL = TTL
     
     @abstractmethod
     def typeIdentifier(self): ...
@@ -43,6 +44,10 @@ class GameObject(ABC):
         self.__vel.limit_ip(SPEED_LIMIT)
         self.__rect.move_ip(self.__vel.x, self.__vel.y)
         self.__accel =  Vector()
+        self.__TTL -= 1
+
+    def is_alive(self):
+        return self.__TTL > 0
 
     def set_accel(self, accel: Vector):
         self.__accel += accel

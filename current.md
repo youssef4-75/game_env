@@ -1,5 +1,8 @@
-currently on: creating the interaction mechanism
+done: created the interaction mechanism
+currently on: the life mechanisms
 
 next:
-- make a real interaction between two players (repel)
-- lazy update: dont update until the loop ends
+- alive
+- death state
+- time to live
+- damage creation through direct interaction

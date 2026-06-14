@@ -55,9 +55,9 @@ while win.running:
         services_manager.draw(win, p)
         services_manager.translate(p)
 
-    
-    lake.interaction()
 
+    lake.interaction()
+    lake.garbage_collect()
     win.display()
 
 
