@@ -42,10 +42,10 @@ class GameObject(ABC):
         self.__vel += self.__accel
         self.__vel.limit_ip(SPEED_LIMIT)
         self.__rect.move_ip(self.__vel.x, self.__vel.y)
-        self.__accel = Vector()
+        self.__accel =  Vector()
 
     def set_accel(self, accel: Vector):
-        self.__accel = accel
+        self.__accel += accel
 
     @abstractmethod
     def draw(self, window):

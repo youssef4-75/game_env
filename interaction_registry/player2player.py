@@ -17,6 +17,6 @@ def Player2Player(player1: Player, player2: Player):
         return 
     direction = (REPULSE/r) * vector12.normalize()
     print(direction)
-    sm.repeller.repel(player1, -direction)
-    sm.repeller.repel(player2, direction)
+    sm.repel(player1, -direction)
+    sm.repel(player2, direction)
     
