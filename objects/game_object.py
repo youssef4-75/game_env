@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 import pygame as pg
 
-from utils import Vector, K, SPEED_LIMIT
+from utils import Vector, K, SPEED_LIMIT, Pointable
 
 
 class GameObject(ABC):
@@ -56,3 +56,9 @@ class GameObject(ABC):
     def translate(self):
         """this tells the translator manager how this objects receive motions from the user input"""
         ...
+
+    def x(self):
+        return self.rect.x
+
+    def y(self):
+        return self.rect.y

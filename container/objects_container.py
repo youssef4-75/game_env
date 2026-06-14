@@ -19,6 +19,7 @@ class ObjectsContainer(OrderedLake):
             yield i
 
     def interaction(self):
+        self.update()
         interacted = set()
         
         for p1, p2 in self.through_X():

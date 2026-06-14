@@ -37,3 +37,6 @@ class OrderedLake(Lake):
         self.Y_order.append(o)
         return o
 
+    def update(self):
+        self.X_order.sort(key=lambda point: point.x())
+        self.Y_order.sort(key=lambda point: point.y())
