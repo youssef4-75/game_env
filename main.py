@@ -1,14 +1,13 @@
 import pygame as pg
 
-from animation.animation import Animation
-from game.game_manager import GameManager
+from animation import Animation
+from game import GameManager
 
 from objects import Player
 
-from objects import consolify
-from screen.background import WithBackGround
-from utils import Vector
-from utils.variables import PLAYER_SIZE
+from utils import consolify
+from visuals import WithBackGround, WithPDisplayer
+from utils import Vector, PLAYER_SIZE
 
 
 # ------------------------- 1. creating the game ---------------------
@@ -55,22 +54,13 @@ def player(): return Player("you", "yellow", Vector.random(*win_size).to_tuple()
 
 # ------------------------- 3. Adding displayers ---------------------
 
-def value_provider(player: Player):
-    return player.HP
-
-
-r = []
-for i in range(1, 5):
-    r.append(
-        pg.Rect(10, 30 * i, 100, 20)
-    )
-
-game.create_disp_for_players("grey", "red", *r, value_provider=value_provider)
+disp = WithPDisplayer()
+# game.create_disp_for_players("grey", "red", *r, value_provider=value_provider)
 
 
 # ------------------------- 4. The window's plugin ---------------------
-bg = WithBackGround("assets/bg.png")
-game.add_plugin(bg)
+bg = WithBackGround("assets/bg1.png")
+game.add_plugin(bg, disp)
 # ------------------------- -1. The game loop ---------------------
 while game.running:
     for event in game.key_events():

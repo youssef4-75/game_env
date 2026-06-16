@@ -3,13 +3,10 @@
 
 from abc import ABC, abstractmethod
 
-from objects.interaction_mixin import InteractionMixin
-from utils.variables import MAX_MP
-
-
-from .life_mixin import LifeMixin
-from .motion_mixin import MotionMixin
-from .shape_mixin import ShapeMixin
+from .mixins import (
+    ConsciousMixin, InteractionMixin, 
+    LifeMixin, MotionMixin, ShapeMixin
+)
 
 
 class GameObject(MotionMixin, ShapeMixin, LifeMixin, InteractionMixin, ABC):
@@ -35,3 +32,6 @@ class GameObject(MotionMixin, ShapeMixin, LifeMixin, InteractionMixin, ABC):
         self.advance_rect()
         self.advance_surf()
         self.advance_life()
+    
+    def is_conscious(self):
+        return isinstance(self, ConsciousMixin)
