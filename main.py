@@ -8,6 +8,7 @@ from objects import Player
 from utils import consolify
 from plugins import WithBackGround, WithPDisplayer
 from utils import Vector, PLAYER_SIZE
+from utils import from_root
 
 
 # ------------------------- 1. creating the game ---------------------
@@ -26,7 +27,7 @@ control2 = consolify(pg.K_w, pg.K_s, pg.K_a, pg.K_d)
 control3 = consolify(pg.K_y, pg.K_h, pg.K_g, pg.K_j)
 control4 = consolify(pg.K_f, pg.K_v, pg.K_c, pg.K_b)
 
-animation = Animation.from_directory("./assets/anim_set01/0x1", PLAYER_SIZE)
+animation = Animation.from_directory(from_root("./assets/anim_set01/0x1"), PLAYER_SIZE)
 
 @game.add
 def player(): 
@@ -54,7 +55,7 @@ def player(): return Player("you", "yellow", Vector.random(*win_size).to_tuple()
 
 # ------------------------- 3. The window's plugin ---------------------
 disp = WithPDisplayer()
-bg = WithBackGround("assets/bg1.png")
+bg = WithBackGround(from_root("assets/bg1.png"))
 game.add_plugin(bg, disp)
 # ------------------------- -1. The game loop ---------------------
 while game.running:
