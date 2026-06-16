@@ -5,10 +5,11 @@ v1.2: interacting
 v1.3: life
 v1.4: shape
 v1.5: consious xx
+v1.6: refactoring it since it works
 
 
 v2 -- the evolution of humanity
-v2.1: damage
+v2.1: damage of touch
 ...
 
 currently on: enhance the games visuals

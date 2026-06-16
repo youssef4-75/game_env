@@ -35,5 +35,11 @@ class ObjectsContainer(OrderedLake):
             if not obj.is_alive():
                 removing.append(obj)
         for _ in removing:
-            self.objects.remove(_)
+            self.remove(_)
             _.die()
+        # print(f"left: {len(self)}")
+    
+    def add(self, *elements: GameObject):
+        for element in elements:
+            element.born()
+        return super().add(*elements)

@@ -37,6 +37,11 @@ class OrderedLake(Lake):
         self.Y_order.append(o)
         return o
 
+    def remove(self, object):
+        self.objects.remove(object)
+        self.X_order.remove(object)
+        self.Y_order.remove(object)
+
     def update(self):
         self.X_order.sort(key=lambda point: point.x())
         self.Y_order.sort(key=lambda point: point.y())
