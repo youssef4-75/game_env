@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='magknight',
+    name='pygame_env',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
