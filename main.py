@@ -1,6 +1,6 @@
 import pygame as pg
 
-from animation import Animation
+from utils import Animation
 from game import GameManager
 
 from objects import Player

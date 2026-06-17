@@ -1,6 +1,6 @@
 import pygame as pg
 
-from animation import Animation, AnimationSet
+from utils import Animation, AnimationSet
 from utils import Mixin, FRAME_SPEED
 
 

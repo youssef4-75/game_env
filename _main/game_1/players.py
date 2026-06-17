@@ -1,14 +1,12 @@
 import pygame as pg
 
-from animation import Animation
+from utils import Animation
 from game import GameManager
 
 from objects import Player
 
-from utils import consolify, attach_grimoire
-from plugins import WithBackGround, WithPDisplayer
-from utils import Vector, PLAYER_SIZE
-from utils.absolute_path_ext import from_root
+# from plugins import WithBackGround, WithPDisplayer
+from utils import consolify, attach_grimoire, Vector, PLAYER_SIZE, from_root
 from .actions import grimoire1 
 
 
