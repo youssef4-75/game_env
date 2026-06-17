@@ -14,7 +14,7 @@ def actionify(grimoire: dict, *keys, mana, cooldown, initial_delay, action):
     grimoire[keys, mana, cooldown, initial_delay] = action
     
 
-def actionify_deco(grimoire: dict, *keys, mana, cooldown, initial_delay):
+def actionify_deco(grimoire: dict, *keys, mana, cooldown, initial_delay=0):
     def deco(action):
         actionify(grimoire, *keys, mana=mana, cooldown=cooldown, initial_delay=initial_delay, action=action)
         return action
