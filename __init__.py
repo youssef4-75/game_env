@@ -5,4 +5,4 @@ from .objects import *
 # from .objects.mixins import *
 from .utils import *
 from .plugins import *
-from .interaction_registry import registry
+from .interaction_registry import *

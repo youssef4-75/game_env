@@ -32,11 +32,10 @@ class MotionMixin(Mixin, Pointable):
     def speed(self):
         return self.__speed
 
-    def advance_rect(self):
+    def advance_rect(self, SPEED_LIMIT=None):
         self.__accel -= K_FRICTION * self.__vel
         self.__vel += self.__accel
-        self.__vel.limit_ip(SPEED_LIMIT)
-        self.move(self.__vel)
+        self.move(self.__vel, SPEED_LIMIT)
         self.__accel = Vector()
 
     def x(self):
@@ -46,12 +45,13 @@ class MotionMixin(Mixin, Pointable):
         return self.rect.y
 
     # ------ 
-    def move_in_direction(self, direction: Vector):
+    def move_in_direction(self, direction: Vector, SPEED_LIMIT=None):
         velocity = direction.normalize() * self.speed
-        self.move(velocity)
+        self.move(velocity, SPEED_LIMIT)
 
-    def move(self, velocity: Vector):
-        velocity.limit_ip(SPEED_LIMIT)
+    def move(self, velocity: Vector, SPEED_LIMIT=None):
+        if SPEED_LIMIT:
+            velocity.limit_ip(SPEED_LIMIT)
         self.__rect.move_ip(velocity.x, velocity.y)
 
     def set_accel(self, accel: Vector):
